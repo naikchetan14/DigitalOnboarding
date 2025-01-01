@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const QRCode = require("qrcode");
 const Guest = require("../models/guestModel.js");
 
-const url = `http://192.168.1.106:3000`;
+const url = `http://localhost:5173`;
 
 exports.addGuestHotelDetails = async (req, res) => {
 try {

@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { addGuestdetails } from "../../Actions/guestAction/guestActions";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAlert } from "react-alert";
-import { clearMessage } from "../../Reducers/guestReducers/guestReducers";
+import {
+  clearError,
+  clearMessage,
+} from "../../Reducers/guestReducers/guestReducers";
 
 const Guest = () => {
   const alert = useAlert();
@@ -31,8 +34,15 @@ const Guest = () => {
     onSubmit: async (values, { resetForm }) => {
       try {
         const res = await dispatch(addGuestdetails({ ...values, hotelId: id }));
-        navigate("/guest/thanks");
-        resetForm();
+        if (res.type === "addGuestdetails/fulfilled") {
+          // Handle successful case
+          navigate("/guest/thanks");
+          console.log("Success:", res);
+          resetForm();
+        } else if (res.type === "addGuestdetails/rejected") {
+          // Handle error case console.error("Error:", res.payload);
+          throw new Error("Invalid Details");
+        }
       } catch (error) {
         console.log("error", error.message);
       }
@@ -217,7 +227,7 @@ const Guest = () => {
             <div>
               <Button
                 btnType="submit"
-                btnText="Register"
+                btnText="Add Guest"
                 btnTextColor="white"
                 btnBgColor="red"
               />

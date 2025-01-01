@@ -9,11 +9,8 @@ exports.authorizeRolesForGuestAdmin = (allowedRoles) => {
 };
 
 exports.accessForEveryAdmin = (allowedRoles) => {
-    console.log(allowedRoles)
   return (req, res, next) => {
-    const { role } = req.user;
-    console.log('role user',role,req.user);
-    if (!allowedRoles.includes(role)) {
+    if (!allowedRoles.includes("Guest")) {
       return res.status(403).json({ success: false, message: "Access denied" });
     }
     next();

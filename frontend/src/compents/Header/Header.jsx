@@ -6,6 +6,7 @@ import { useAlert } from "react-alert";
 import {
   clearError,
   clearMessage,
+  logout,
 } from "../../Reducers/authReducers/userReducers";
 
 const Header = () => {
@@ -20,6 +21,7 @@ const Header = () => {
     try {
       console.log("running");
       await dispatch(logoutUser());
+      dispatch(logout()); // Clear the local state
     } catch (error) {
       console.log(error.message);
     }
@@ -87,12 +89,20 @@ const Header = () => {
               <p className="text-white font-bold">{user?.username}</p>
 
               <span className="text-white font-bold">
-                Role: {user?.role || "Guest"}
+                {user?.role || "Guest"}
               </span>
             </div>
           ) : (
-            <div className="flex flex-row gap-1">
-              <span className="text-white font-bold">Role: Guest</span>
+            <div className="flex flex-row gap-2 items-center">
+              <span className="text-white font-bold"> Guest</span>
+              <Link to={"/login"}>
+                <button
+                  type="button"
+                  className="px-5 font-bold text-md p-2 bg-green-500 rounded-md text-white"
+                >
+                  Log In
+                </button>
+              </Link>
             </div>
           )}
         </div>

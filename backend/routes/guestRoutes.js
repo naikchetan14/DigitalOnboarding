@@ -6,6 +6,6 @@ const router = express.Router();
 
 router
   .route("/guest/hoteldetails")
-  .post(authenticate, accessForEveryAdmin(['mainAdmin','guestAdmin']), addGuestHotelDetails);
+  .post(accessForEveryAdmin(['guestAdmin',"Guest"]), addGuestHotelDetails);
 
 module.exports = router;

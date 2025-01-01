@@ -13,7 +13,7 @@ const Card = ({ hotelName, address, hotelImage, qrCodeImage }) => {
         <h1 className="text-3xl font-bold text-center">{hotelName}</h1>
         <h4 className="text-md text-gray-60 text-center">{address}</h4>
         <p className="text-center font-bold">Scan This Below Code to fill the guest details...</p>
-        <div className="w-100 mx-auto"><i class="fa-sharp fa-solid fa-arrow-down text-3xl text-violet-950 font-bold"></i></div>
+        <div className="w-100 mx-auto"><i className="fa-sharp fa-solid fa-arrow-down text-3xl text-violet-950 font-bold"></i></div>
       </div>
 
       <div className="flex-1">
@@ -24,7 +24,7 @@ const Card = ({ hotelName, address, hotelImage, qrCodeImage }) => {
         />
       </div>
 
-      <div className="flex flex-row gap-2">
+      {/* <div className="flex flex-row gap-2">
           <Button
             btnType={"button"}
             btnText={"DELETE"}
@@ -39,7 +39,7 @@ const Card = ({ hotelName, address, hotelImage, qrCodeImage }) => {
             btnTextColor={"white"}
             btnIcon={<i className="fa-solid fa-hotel mx-1"></i>}
           ></Button>
-        </div>{" "}
+        </div>{" "} */}
     </div>
   );
 };

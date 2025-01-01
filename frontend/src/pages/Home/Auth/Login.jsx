@@ -104,7 +104,7 @@ const Login = () => {
           <div>
             <Button
               btnType="submit"
-              btnText="Register"
+              btnText="Log In"
               btnTextColor="white"
               btnBgColor="red"
             />
