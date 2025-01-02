@@ -10,9 +10,11 @@ import {
   clearError,
   clearMessage,
 } from "../../Reducers/guestReducers/guestReducers";
+import ReactPaginate from "react-paginate";
 const GuestList = () => {
   const { message, error } = useSelector((store) => store.guest);
   const { user } = useSelector((store) => store.user);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const alert = useAlert();
   const [allGuestList, setGuestList] = useState([]);
@@ -20,7 +22,7 @@ const GuestList = () => {
   const [isOpened, setisOpened] = useState(false);
   const [viewGuestDetails, setViewGuestDetails] = useState(null);
   const dispatch = useDispatch();
-
+  const guestPerPage = 5;
   const geAlltGuestListData = async () => {
     try {
       const res = await dispatch(getAllGuestList());
@@ -62,10 +64,18 @@ const GuestList = () => {
       dispatch(clearError());
     }
   }, [message, error]);
+
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected);
+  };
+  const displayedGuest = allGuestList.slice(
+    currentPage * guestPerPage,
+    (currentPage + 1) * guestPerPage
+  );
   return (
     <div className="overflow-x-auto shadow-md sm:rounded-lg p-3">
       <h1 className="text-center text-2xl mt-3 mb-3">Guest List</h1>
-      <table className="w-full text-center text-sm text-gray-500 dark:text-gray-400">
+      <table className="w-full text-center text-sm text-gray-500 dark:text-gray-400 scroll-auto">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-white">
           <tr>
             <th scope="col" className="px-6 py-3">
@@ -96,7 +106,7 @@ const GuestList = () => {
           </tr>
         </thead>
         <tbody>
-          {allGuestList.map((item) => (
+          {displayedGuest.map((item) => (
             <tr
               key={item._id}
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
@@ -147,6 +157,24 @@ const GuestList = () => {
           ))}
         </tbody>
       </table>
+
+      {allGuestList.length > 0 && (
+            <ReactPaginate
+              previousLabel={"Previous"}
+              nextLabel={"Next"}
+              breakLabel={"..."}
+              pageCount={Math.ceil(allGuestList.length /guestPerPage)} // Total pages
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              pageClassName={"page-item"}
+              pageLinkClassName={"page-link"}
+              previousClassName={"page-item"}
+              previousLinkClassName={"page-link"}
+              nextClassName={"page-item"}
+              nextLinkClassName={"page-link"}
+              activeClassName={"active"}
+            />
+          )}
       {isOpened && (
         <EditModal
           setisOpened={setisOpened}
