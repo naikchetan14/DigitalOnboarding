@@ -5,13 +5,16 @@ const cookieParser=require("cookie-parser");
 
 const app = express();
 app.use(cookieParser());
-app.use(express.json());
+// Using Middlewares
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 const corsOptions = {
   //   origin: ["http://localhost:3000"],
   origin: true,
   credentials: true,
 };
+
 
 
 

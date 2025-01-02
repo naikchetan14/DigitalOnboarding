@@ -3,13 +3,15 @@ import Button from "../Button/Button";
 
 const Card = ({ hotelName, address, hotelImage, qrCodeImage }) => {
   return (
-    <div className="p-8 rounded-md shadow-2xl bg-white flex flex-col gap-1 max-w-[400px] w-full hover:border-violet-950 hover:border-2 transition-all">
+    <div className="p-2 rounded-md shadow-2xl bg-white flex flex-col hover:border-violet-950 hover:border-2 transition-all">
       <div className="flex-1 flex flex-col gap-2">
+        <div className="w-full h-[300px]">
         <img
           src={hotelImage}
           alt={`Image of ${hotelName}`}
           className="w-full h-full object-cover rounded-md md:mb-0"
         />
+        </div>
         <h1 className="text-3xl font-bold text-center">{hotelName}</h1>
         <h4 className="text-md text-gray-60 text-center">{address}</h4>
         <p className="text-center font-bold">Scan This Below Code to fill the guest details...</p>

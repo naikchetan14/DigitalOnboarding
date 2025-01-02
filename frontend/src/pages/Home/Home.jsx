@@ -31,13 +31,13 @@ const Home = () => {
           {loading ? (
             <Loading></Loading>
           ) : (
-            <div className="flex flex-row justify-center md:gap-4 gap-3 flex-wrap items-center">
+            <div className="flex flex-row justify-center md:gap-4 gap-3 p-2 flex-wrap items-center">
               {allHotels ? (
                 allHotels.map((item) => (
-                  <Link to={`/hotel/${item._id}`} key={item._id}>
+                  <Link to={`/hotel/${item._id}`} key={item._id} className="w-[400px]">
                     <div>
                       <Card
-                        hotelImage={item.logo}
+                        hotelImage={item?.logo?.url || item?.logo}
                         hotelName={item.hotelName}
                         address={item.address}
                         qrCodeImage={item.qrCode}

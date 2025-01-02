@@ -9,6 +9,7 @@ import Hotel from "./pages/Hotel/hotel";
 import Thanks from "./pages/Thanks/Thanks";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import GuestList from "./pages/Guest/GuestList";
+import Sorry from "./pages/Sorry/Sorry";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
                 </ProtectedRoute>
               }
             ></Route>
+             <Route path="*" element={<Sorry />} /> // page-not-found route
           </Route>
         </Routes>
       </BrowserRouter>

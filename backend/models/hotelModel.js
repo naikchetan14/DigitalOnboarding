@@ -9,8 +9,14 @@ const hotelSchema = new mongoose.Schema(
       trim: true,
     },
     logo: {
-      type: String, // This will store the URL or path to the logo image file
-      required: true,
+      public_id: {
+        type: String,
+        required: [true, "Hotel Image is required!"],
+      },
+      url: {
+        type: String,
+        required: [true, "Hotel Image is required!"],
+      },
     },
     address: {
       type: String,

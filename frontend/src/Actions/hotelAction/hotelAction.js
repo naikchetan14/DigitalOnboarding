@@ -19,11 +19,14 @@ export const getAllHotelList = createAsyncThunk("getAllHotelList", async () => {
 
 export const addNewHotel = createAsyncThunk(
   "addNewHotel",
-  async ({values}, { rejectWithValue }) => {
+  async (values, { rejectWithValue }) => {
     try {
-      console.log('values')
+      console.log('values',values)
       const response = await axios.post(`${DEV_URL}/api/v1/add/hotel`, values, {
         withCredentials: true,
+        // headers: {
+        //   "Content-Type": "multipart/form-data", // Important for file uploads
+        // },
       });
       return response.data;
     } catch (error) {

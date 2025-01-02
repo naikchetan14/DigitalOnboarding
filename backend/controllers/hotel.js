@@ -1,13 +1,18 @@
 const mongoose = require('mongoose');
 const QRCode = require("qrcode");
 const Hotel = require("../models/hotelModel");
+const cloudinary = require("cloudinary");
 
-const url = `http://localhost:5173/`;
+
+const url = `http://localhost:5173`;
 
 exports.addNewHotel = async (req, res) => {
     try {
       const { hotelName, logo, address } = req.body;
       console.log('Entered addNewHotel function',hotelName,logo,address);
+      const myCloud = await cloudinary.v2.uploader.upload(logo, {
+        folder: "hotel",
+      });
   
       if (!hotelName || !logo || !address) {
         return res.status(400).json({
@@ -21,7 +26,7 @@ exports.addNewHotel = async (req, res) => {
       // Step 1: Create the hotel without the QR code
       const newHotel = await Hotel.create({
         hotelName,
-        logo,
+        logo: { public_id: myCloud.public_id, url: myCloud.secure_url },
         address,
         qrCode:'static code'
       });

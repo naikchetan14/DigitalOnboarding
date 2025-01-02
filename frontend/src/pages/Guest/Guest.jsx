@@ -61,8 +61,8 @@ const Guest = () => {
   }, [message, error]);
   return (
     <div>
-      <div className="w-full p-4 flex justify-center items-center bg-gray-50">
-        <div className="bg-white shadow-lg p-8 rounded-lg max-w-md w-full">
+      <div className="w-[100%] p-4 flex justify-center items-center bg-gray-50">
+        <div className="bg-white shadow-lg p-8 rounded-lg w-[450px]">
           <form className="flex flex-col gap-3" onSubmit={formik.handleSubmit}>
             <h1 className="text-center text-5xl font-bold text-violet-950 mb-6">
               Guest Form
